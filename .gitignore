@@ -1,0 +1,5 @@
+venv/
+.env
+session.pkl
+session.json
+__pycache__/
