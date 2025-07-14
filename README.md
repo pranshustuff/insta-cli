@@ -24,3 +24,6 @@ Will update if any changes occur in the code and I figure things in a better way
 - `--threads <n>` : reads top n threads
 - `--messages <x>` : reads last x messages from top n threads
              
+
+### Note:
+If you want this to function like a CLI, you can create an alias for /path/to/main.py and execute it with the same args. There's ways to do that in every OS. 
