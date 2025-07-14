@@ -21,7 +21,7 @@ Will update if any changes occur in the code and I figure things in a better way
 
 **Flags** : 
 - `--unread` : only unread
-- `--threads <n>` : reads top n threads
+- `--thread <n>` : reads top n threads
 - `--messages <x>` : reads last x messages from top n threads
              
 
