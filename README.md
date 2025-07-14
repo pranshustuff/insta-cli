@@ -19,7 +19,8 @@ Will update if any changes occur in the code and I figure things in a better way
 
 `python3 main.py` - Reads your latest 5 threads and 5 messages each.
 
-**Flags** : - `--unread` : only unread
-            - `--threads <n>` : reads top n threads
-            - `--messages <x>` : reads last x messages from top n threads
+**Flags** : 
+- `--unread` : only unread
+- `--threads <n>` : reads top n threads
+- `--messages <x>` : reads last x messages from top n threads
              
