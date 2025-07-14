@@ -64,6 +64,9 @@ def main():
                 console.print(Panel(Text(content, style="link"), title=name_label, expand=False))
             elif message.text is not None:
                 console.print(Panel(Text(message.text), title=name_label, expand=False))
+            elif message.xma_share is not None:
+                content=str(message.xma_share.video_url).split('/?')[0]
+                console.print(Panel(Text(content, style="link"), title=name_label, expand=False))
             elif message.reel_share:
                 code = message.reel_share.media.code
                 content = f"https://www.instagram.com/reel/{code}"

@@ -2,7 +2,7 @@
 
 USEFUL_TYPES = {
     "text", "media", "reel_share", "media_share", "link",
-    "felix_share", "story_share", "clip"
+    "felix_share", "story_share", "clip", 'xma_media_share'
 }
 
 
