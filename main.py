@@ -4,12 +4,15 @@ from fetch import get_filtered_threads
 from session import login
 import argparse
 from dotenv import dotenv_values
-from rich.console import Console
-from rich.theme import Theme
+from rich.console import Console # type: ignore
+from rich.theme import Theme # type: ignore
+from rich.panel import Panel
+from rich.text import Text
+from rich.markdown import Markdown
 
 custom_theme = Theme({
-    "title": "magenta",
-    "you": "blue",
+    "title": "red",
+    "you": "cyan",
     "other": "yellow",
     "link": "blue",
     "dim": "dim",
@@ -17,7 +20,7 @@ custom_theme = Theme({
 
 console = Console(theme=custom_theme)
 
-config = dotenv_values(".env")
+config = dotenv_values("/home/pranshu/insta-cli/.env")
 user = config["USERNAME"]
 pwd = config["PASSWORD"]
 
@@ -39,8 +42,11 @@ def main():
     )
 
     for thread in threads:
-        console.print(f"\nThread: {thread.thread_title}", style="title")
-        
+        # Title box for each thread
+        thread_title = Text(thread.thread_title, style="title")
+        console.print(Panel(thread_title, expand=False, border_style="title"))
+
+        # Message list
         for message in thread.messages:
             sender_id = message.user_id
             sender_name = next(
@@ -49,20 +55,22 @@ def main():
             )
 
             is_you = sender_name == "You"
-            style = "you" if is_you else "other"
+            name_style = "you" if is_you else "other"
+            name_label = Text(sender_name, style=name_style)
 
-            console.print(f"{sender_name}:", style=style)
-
+            # Construct message content
             if message.clip is not None:
-                code = message.clip.code
-                console.print(f"  https://www.instagram.com/reel/{code}", style="link")
+                content = f"https://www.instagram.com/reel/{message.clip.code}"
+                console.print(Panel(Text(content, style="link"), title=name_label, expand=False))
             elif message.text is not None:
-                console.print(f"  {message.text}")
+                console.print(Panel(Text(message.text), title=name_label, expand=False))
             elif message.reel_share:
-                url = message.reel_share.media.code
-                console.print(f"  https://www.instagram.com/reel/{url}", style="link")
+                code = message.reel_share.media.code
+                content = f"https://www.instagram.com/reel/{code}"
+                console.print(Panel(Text(content, style="link"), title=name_label, expand=False))
             else:
-                console.print(f"  [{message.item_type}]", style="dim")
+                console.print(Panel(Text(f"[{message.item_type}]", style="dim"), title=name_label, expand=False))
 
+        console.print()  # Empty line between threads
 if __name__ == "__main__":
     main()

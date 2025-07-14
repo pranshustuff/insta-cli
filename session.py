@@ -4,9 +4,10 @@ import os, pickle
 from dotenv import dotenv_values
 
 def login():
-    config = dotenv_values('.env')
+    config = dotenv_values("/home/pranshu/insta-cli/.env")
     usr = config["USERNAME"]
     pwd = config["PASSWORD"]
+
 
     cl = Client()
     SESSION_FILE = "session.pkl"
